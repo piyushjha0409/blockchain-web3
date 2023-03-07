@@ -1,0 +1,17 @@
+{
+  "name": "ether",
+  "version": "1.0.0",
+  "description": "This is tutorial of ether js",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Piyush Jha",
+  "license": "ISC",
+  "dependencies": {
+    "ethers": "^5.7.2"
+  }
+}
