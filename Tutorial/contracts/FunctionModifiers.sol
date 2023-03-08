@@ -10,6 +10,15 @@ constructor(){
 }
     
 modifier onlyOwner(){
-    
+    require(msg.sender == owner, "You are not the owner");
+    //first will check the condition then it will run the rest of the code
+    _; //this is the modification
+}
+
+//creating a function and apply the onlyOwner modifier on it 
+function changeOwner(address _newOwner) public onlyOwner {
+    // We will only reach this point if the modifier succeeds with its checks
+    // so the caller of this transaction must be the current owner
+    owner = _newOwner;
 }
 }
