@@ -28,4 +28,9 @@ contract TodoList {
      function update(uint _index, string memory _text)public{
         todos[_index].text = _text;
      }
+
+     //update completed
+     function toggleCompleted(uint _index) public {
+      todos[_index].completed = !todos[_index].completed;
+     }
 }
