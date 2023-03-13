@@ -1,0 +1,40 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "/home/piyush/Desktop/My stuff/web3/whitelist-dapp/hardhat/contracts/whiteList.sol": {
+      "lastModificationDate": 1678721639988,
+      "contentHash": "b7564c6835775bbbdb9425c3e4551bf5",
+      "sourceName": "contracts/whiteList.sol",
+      "solcConfig": {
+        "version": "0.8.18",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "whiteList"
+      ]
+    }
+  }
+}
