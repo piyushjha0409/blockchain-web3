@@ -20,8 +20,19 @@ export default function Home() {
   //numberOfWhiteListed tracks the number addresses whitelisted
   const [numberOfWhiteListed, setNumberOfWhiteListed] = useState(0);
 
-  //
+  //use the reference of the web3 modal (used for connecting the metamask)
+  const web3modalRef = useRef();
 
+//we need a signer or the provider 
+const getProviderOrSigner = async (needSigner = false) => {  // param: needSigner true if the signer otherwise false
+
+  const provider = await web3modalRef.current.connect();
+  const web3Provider = new providers.Web3Provider(provider);
+
+  // If users is not connected to the goerli network, let them know throw and error
+  const {chainID} = await web3Provider.getNetwork(provider);
+
+}
   return (
     <>
        <div>
