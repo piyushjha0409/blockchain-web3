@@ -4,7 +4,7 @@ import { providers, Contract } from 'ethers'
 import { useState, useRef, useEffect } from 'react'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
-import { WHITELIST_CONTRACT_ADDRESS, abi } from "../constants";
+import { WHITELIST_CONTRACT_ADDRESS, abi } from "../../constants";
 
 
 export default function Home() {
@@ -58,9 +58,16 @@ const addAddressToWhitelist = async () => {
   );
 
   //call the whitelist address function from the contract
-  const tx = whitelistContract.addAddressToWhitelist();
+  const tx = await whitelistContract.addAddressToWhitelist();
   setLoading(true);
 
+  //wait for the transaction to get mined
+  await tx.wait()
+  setLoading(false);
+
+  //get the updated number of address whitelist
+  await getNumberOfWhitelisted();
+  setJoinedWhiteList(true);  //now the current wallet address has joined the whitelist
  }catch(err){
   console.error(err);
 };
@@ -78,10 +85,35 @@ const getNumberOfWhitelisted = async () => {
        provider
     );
     //calling the getNumberOfWhitelisted from the contract
-     const _numberOfWhitelistedContracts = await whitelistContract.numbgetNumberOfWhitelisted()
+     const _numberOfWhitelisted = await whitelistContract.numWhiteListedAddress();
+     setNumberOfWhiteListed(_numberOfWhitelisted)
   }catch(err){
     console.error(err);
   }
+};
+
+//function for checking wether the address is already in the whitelist
+const checkAlreadyInWhitelist =  async () => {
+try{
+  //signer can do all that a provider can
+  const signer = await getProviderOrSigner();
+
+  //creating instance of the new contract 
+  const whitelistContract = new Contract(
+   WHITELIST_CONTRACT_ADDRESS,
+   abi,
+   signer
+  );
+  //get the address associated with the signer which is connected to metamask
+  const address = await signer.getAddress()
+
+  //call the whitelist address from the contract
+  const _joinedWhitelist = await whitelistContract.whiteListedAddresses(address);
+  setJoinedWhiteList(_joinedWhitelist);
+
+}catch(err){
+  console.error(err);
+}
 }
 
   return (
