@@ -114,10 +114,57 @@ try{
 }catch(err){
   console.error(err);
 }
-}
+};
+
+//function for connecting the wallet 
+const connectWallet = async () => {
+  try{
+  //get the provider from web3modal 
+  await getProviderOrSigner();
+  setWalletConnected(true);
+
+  checkAlreadyInWhitelist();
+  getNumberOfWhitelisted();
+
+  }catch(err){
+    console.error(err);
+  }
+};
+
+/* renderButton: Returns a button based on the state of the dapp */
+const renderButton = () => {
+  if(walletConnected){
+    if(joinedWhiteList){
+       return(
+        <div className={styles.description}>
+          Thanks for joining the whitelist!
+        </div>
+       );
+    }else if(loading){
+      return <button className={styles.button}>Loading...</button>
+    }else{
+      return (
+        <button onClick={addAddressToWhitelist} className={styles.button}>
+          Join the whitelist!
+        </button>
+      );
+    }
+  }else{
+    <button onClick={connectWallet} className={styles.button}>
+      Connect Wallet!
+    </button>
+  }
+};
+
+useEffect(()=>{
+  //if the wallet is not connected then create the instance of the web3 modal 
+  if(!walletConnected){
+
+  }
+})
   return (
     <>
-       <div>
+ <div>
       <Head>
         <title>Whitelist Dapp</title>
         <meta name="description" content="Whitelist-Dapp" />
@@ -131,7 +178,7 @@ try{
             It&#39;s an NFT collection for developers in Crypto.
           </div>
           <div className={styles.description}>
-            {numberOfWhitelisted} have already joined the Whitelist
+            {numberOfWhiteListed} have already joined the Whitelist
           </div>
           {renderButton()}
         </div>
@@ -144,6 +191,7 @@ try{
         Made with &#10084; by Crypto Devs
       </footer>
     </div>
+    <div>Hi there is a next app!</div>
     </>
   )
 }
