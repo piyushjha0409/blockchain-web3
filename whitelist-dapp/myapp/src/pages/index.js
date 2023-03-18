@@ -159,9 +159,15 @@ const renderButton = () => {
 useEffect(()=>{
   //if the wallet is not connected then create the instance of the web3 modal 
   if(!walletConnected){
-
+   web3modalRef.current = new Web3Modal({
+    network: "goerli",
+    providerOptions: {},
+    disableInjectedProvider: false,
+   })
+   connectWallet(); //calling the function 
   }
-})
+}, [walletConnected])
+
   return (
     <>
  <div>
